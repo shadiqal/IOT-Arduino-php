@@ -1,0 +1,144 @@
+<html>
+
+<head>
+    <title>Pengukur Berat Muatan Truk</title>
+    <link rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container z-depth-1">
+        <nav class="navbar navbar-default secondary-color-dark">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+
+
+                    <a class="navbar-brand" style="color: white;"><b><i>Pengukur Berat Muatan Truk</i></b></a>
+
+                </div>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="../php/logout.php" class="btn btn-primary btn-sm"><b>Keluar </b></a>
+
+                        </li>
+                    </ul>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+            </div><!-- /.container-fluid -->
+        </nav><br>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header success-color">
+                        <p class="lead" style="color: white;">Data Sensor Real-Time</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> Tekan tombol dibawah untuk memilih batas berat maksimum : </p>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-unique btn-sm"
+                                onclick="setVariabel(10)">1000gr</button>
+                            <button type="button" class="btn btn-unique btn-sm"
+                                onclick="setVariabel(20)">2000gr</button>
+                            <button type="button" class="btn btn-unique btn-sm"
+                                onclick="setVariabel(30)">3000gr</button>
+                            <button type="button" class="btn btn-unique btn-sm"
+                                onclick="setVariabel(40)">4000gr</button>
+                        </div><br><br>
+                        <h6 class="d-inline card-text"><i class="fas fa-truck-moving"></i> Berat Keseluruhan :</h6>
+                        <p class="d-inline card-text " id="berat"></p>
+                        <p class="d-inline card-text">gr</p>
+                        <br>
+                        <p class="card-text" style="font-size: 12px;" id="waktu"></p>
+                        <span class="badge badge-danger" id="pesan"></span>
+                        <div class="btn danger-color btn-primary btn-sm float-right" data-toggle="modal"
+                            data-target="#basicExampleModal" onclick="loadModal()">Details</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="d-inline card-text"><i class="fas fa-truck-loading"></i> Berat Muatan truk :</p>
+                        <p class="d-inline card-text" id="beratMuatan">
+                        </p>
+                        <p class="d-inline card-text">gr</p>
+                        <hr>
+                        <p class="card-text">Aplikasi monitoring data berat truk secara real time<br>
+                            Penggunaan : <br><br>
+                            a. Aplikasi ini menampilkan data yang diterima oleh sensor secara real time<br>
+                            b. Data dimasukkan database dan diolah menjadi data logging.<br>
+                            c. Tekan tombol data logging untuk melihat keseluruhan data sensor didalam database</p>
+                        <span class="badge badge-danger" id="pesan"></span>
+                    </div>
+                </div><br><br><br>
+
+            </div>
+
+            <br><br><br><br><br>
+        </div><br>
+
+        <!-- Modal -->
+        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="dataLogging"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="notifBatas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="exampleModalLabel">Batas maksimum berat telah di ubah</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+        </script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js">
+        </script>
+        <script type="text/javascript" src="../js/dashboard.js"></script>
+</body>
+
+</html>
